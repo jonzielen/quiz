@@ -1,6 +1,7 @@
 (function() {
 
   const Quiz = {
+    mainElem: '#quiz',
     newElem: function(elemType, className, text) {
       let elem = document.createElement(elemType);
 
