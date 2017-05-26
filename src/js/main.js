@@ -2,7 +2,6 @@ window.Quiz = function(elem) {
 
   const QuizBuilder = {
     quizElem: document.querySelector(elem),
-    //quizSubmit: document.querySelector('.submit').addEventListener('submit', this.validation()),
     newElem: function(elemType, className, text) {
       let elem = document.createElement(elemType);
 
@@ -60,10 +59,11 @@ window.Quiz = function(elem) {
         <div class="quiz-wrapper">
           ${questions}
         </div>
-        <button type="submit" class="submit">Submit</button>`;
+        <button type="submit" class="quiz-submit">Submit</button>`;
 
       this.quizElem.insertAdjacentHTML('afterbegin', temp);
 
+      document.querySelector('.quiz-submit').addEventListener('click', this.validation);
     },
     buildQuizQuestion: function() {
       const quizQuestions = this.data.map(function(e, i, a) {
@@ -89,5 +89,5 @@ window.Quiz = function(elem) {
   };
 
   QuizBuilder.buildQuizTemplate();
-  document.querySelector('.submit').addEventListener('click', QuizBuilder.validation);
+
 };
