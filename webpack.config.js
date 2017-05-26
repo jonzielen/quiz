@@ -49,7 +49,7 @@ const config = [{
   ]
 },{
   entry: {
-    main: [
+    quiz: [
       './src/js/main.js'
     ]
   },
@@ -70,10 +70,10 @@ const config = [{
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        },
-        comments: false
+      compress: {
+        warnings: false
+      },
+      comments: false
     })
   ]
 }, {
