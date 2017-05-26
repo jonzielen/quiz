@@ -2,6 +2,7 @@ window.Quiz = function(elem) {
 
   const QuizBuilder = {
     quizElem: document.querySelector(elem),
+    //quizSubmit: document.querySelector('.submit').addEventListener('submit', this.validation()),
     newElem: function(elemType, className, text) {
       let elem = document.createElement(elemType);
 
@@ -81,8 +82,12 @@ window.Quiz = function(elem) {
       });
 
       return quizQuestions.join('');
+    },
+    validation: function() {
+      console.log('valid????');
     }
   };
 
   QuizBuilder.buildQuizTemplate();
+  document.querySelector('.submit').addEventListener('click', QuizBuilder.validation);
 };
