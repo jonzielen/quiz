@@ -30,29 +30,39 @@ window.Quiz = function(elem) {
       {
         question: 'pick b',
         answers: {
-          a: 'a',
-          b: 'b',
-          c: 'c'
+          a: 'aaaa',
+          b: 'bbbb',
+          c: 'cccc'
         },
         correctAnswer: 'b'
       },
       {
         question: 'pick a',
         answers: {
-          a: 'a',
-          b: 'b',
-          c: 'c'
+          a: 'aaaa',
+          b: 'bbbb',
+          c: 'cccc'
         },
         correctAnswer: 'a'
       },
       {
         question: 'pick c',
         answers: {
-          a: 'a',
-          b: 'b',
-          c: 'c'
+          a: 'aaaa',
+          b: 'bbbb',
+          c: 'cccc'
         },
         correctAnswer: 'c'
+      },
+      {
+        question: 'pick d',
+        answers: {
+          a: 'aaaa',
+          b: 'bbbb',
+          c: 'cccc',
+          d: 'dddd'
+        },
+        correctAnswer: 'd'
       }
     ],
     buildQuizTemplate: function() {
@@ -69,21 +79,20 @@ window.Quiz = function(elem) {
     },
     buildQuizQuestion: function() {
 
-      const quizQuestions = this.data.map(function(e, i) {
-        return `
-          <h5>Q: ${e.question}</h5>
-          <label>
-            <input type="radio" name="quesion-${i+1}" value="${e.answers.a}">
-            ${e.answers.a}
-          </label>
-          <label>
-            <input type="radio" name="quesion-${i+1}" value="${e.answers.b}">
-            ${e.answers.b}
-          </label>
-          <label>
-            <input type="radio" name="quesion-${i+1}" value="${e.answers.c}">
-            ${e.answers.c}
+      const quizQuestions = this.data.map(function(e, i, a) {
+
+        let quizList = `<h5>Q: ${e.question}</h5>`;
+
+        for(var key in e.answers) {
+          let value = e.answers[key];
+
+          quizList = quizList + `<label>
+            <input type="radio" name="quesion-${i+1}" value="${key}">
+            ${value}
           </label>`;
+        }
+
+        return quizList;
       });
 
       return quizQuestions.join('');
