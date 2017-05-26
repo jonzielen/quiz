@@ -2,9 +2,6 @@ window.Quiz = function(elem) {
 
   const QuizBuilder = {
     quizElem: document.querySelector(elem),
-    init: function() {
-      this.buildQuizTemplate();
-    },
     newElem: function(elemType, className, text) {
       let elem = document.createElement(elemType);
 
@@ -16,16 +13,6 @@ window.Quiz = function(elem) {
 
       return elem;
     },
-    append: function(obj1, obj2) {
-      var selElem = [];
-
-      Array.prototype.slice.call(arguments).map(function(e) {
-        if (typeof e === 'object') selElem.push(e);
-        if (typeof e === 'string') selElem.push(document.querySelector(e));
-      });
-
-      return selElem[0].appendChild(selElem[1]);
-    },
     data: [
       {
         question: 'pick b',
@@ -35,6 +22,16 @@ window.Quiz = function(elem) {
           c: 'cccc'
         },
         correctAnswer: 'b'
+      },
+      {
+        question: 'pick d',
+        answers: {
+          a: 'aaaa',
+          b: 'bbbb',
+          c: 'cccc',
+          d: 'dddd'
+        },
+        correctAnswer: 'd'
       },
       {
         question: 'pick a',
@@ -53,16 +50,6 @@ window.Quiz = function(elem) {
           c: 'cccc'
         },
         correctAnswer: 'c'
-      },
-      {
-        question: 'pick d',
-        answers: {
-          a: 'aaaa',
-          b: 'bbbb',
-          c: 'cccc',
-          d: 'dddd'
-        },
-        correctAnswer: 'd'
       }
     ],
     buildQuizTemplate: function() {
@@ -78,9 +65,7 @@ window.Quiz = function(elem) {
 
     },
     buildQuizQuestion: function() {
-
       const quizQuestions = this.data.map(function(e, i, a) {
-
         let quizList = `<h5>Q: ${e.question}</h5>`;
 
         for(var key in e.answers) {
@@ -99,5 +84,5 @@ window.Quiz = function(elem) {
     }
   };
 
-  QuizBuilder.init();
+  QuizBuilder.buildQuizTemplate();
 };
