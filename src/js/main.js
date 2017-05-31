@@ -56,9 +56,9 @@ window.Quiz = function(elem) {
       const questions = this.buildQuizQuestion();
       const temp = `
         <h4>Quiz:</h4>
-        <div class="quiz-wrapper">
+        <form action="/" class="quiz-wrapper">
           ${questions}
-        </div>
+        </form>
         <button type="submit" class="quiz-submit">Submit</button>`;
 
       this.quizElem.insertAdjacentHTML('afterbegin', temp);
@@ -69,14 +69,18 @@ window.Quiz = function(elem) {
       const quizQuestions = this.data.map(function(e, i, a) {
         let quizList = `<h5>Q: ${e.question}</h5>`;
 
+        quizList = quizList + `<div class="group-${i+1}">`;
+
         for(var key in e.answers) {
           let value = e.answers[key];
 
-          quizList = quizList + `<label>
-            <input type="radio" name="quesion-${i+1}" value="${key}">
+          quizList = quizList + `<label for="quesion-${i+1}-${key}">
+            <input type="radio" id="quesion-${i+1}-${key}" name="quesion-${i+1}" value="${key}">
             ${value}
           </label>`;
         }
+
+        quizList = quizList + `</div>`;
 
         return quizList;
       });
@@ -84,7 +88,48 @@ window.Quiz = function(elem) {
       return quizQuestions.join('');
     },
     validation: function() {
-      console.log('valid????');
+
+      // group-1
+
+      //console.log(document.querySelectorAll('.quiz-wrapper div[class^="group-"]'));
+      var selGroups = document.querySelectorAll('.quiz-wrapper div[class^="group-"]');
+
+      var selGroupsVals = [];
+
+      [].forEach.call(selGroups, function(e, i) {
+
+        if (e.querySelector('input:checked')) {
+          selGroupsVals.push(e.querySelector('input:checked').value);
+          return;
+        }
+
+        selGroupsVals.push(undefined);
+      });
+
+      console.log(selGroupsVals);
+
+      var selected = document.querySelectorAll('input[name^="quesion-"]:checked');
+
+      //console.log(document.querySelectorAll('input:checked'));
+
+      var selValues = [];
+
+      [].forEach.call(selected, function(e) {
+        selValues.push(e);
+      });
+
+      //console.log(QuizBuilder.data);
+      //console.log(selValues);
+
+      var validAnswers = [];
+      QuizBuilder.data.map(function(e) {
+
+        //console.log(selValues);
+
+        validAnswers.push(e.correctAnswer);
+      });
+
+      //console.log(validAnswers);
     }
   };
 
