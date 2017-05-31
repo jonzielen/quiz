@@ -89,9 +89,6 @@ window.Quiz = function(elem) {
     },
     validation: function() {
 
-      // group-1
-
-      //console.log(document.querySelectorAll('.quiz-wrapper div[class^="group-"]'));
       var selGroups = document.querySelectorAll('.quiz-wrapper div[class^="group-"]');
 
       var selGroupsVals = [];
@@ -108,28 +105,13 @@ window.Quiz = function(elem) {
 
       console.log(selGroupsVals);
 
-      var selected = document.querySelectorAll('input[name^="quesion-"]:checked');
-
-      //console.log(document.querySelectorAll('input:checked'));
-
-      var selValues = [];
-
-      [].forEach.call(selected, function(e) {
-        selValues.push(e);
-      });
-
-      //console.log(QuizBuilder.data);
-      //console.log(selValues);
-
       var validAnswers = [];
       QuizBuilder.data.map(function(e) {
-
-        //console.log(selValues);
 
         validAnswers.push(e.correctAnswer);
       });
 
-      //console.log(validAnswers);
+      console.log(validAnswers);
     }
   };
 
