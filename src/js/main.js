@@ -70,12 +70,12 @@ window.Quiz = function(elem) {
       });
     },
     buildQuizQuestion: function() {
-      const quizQuestions = this.data.map(function(e, i, a) {
+      const quizQuestions = this.data.map((e, i, a) => {
         let quizList = `<h5>Q: ${e.question}</h5>`;
 
         quizList = quizList + `<div class="group-${i+1}">`;
 
-        for(var key in e.answers) {
+        for(let key in e.answers) {
           let value = e.answers[key];
 
           quizList = quizList + `<label for="quesion-${i+1}-${key}">
@@ -92,30 +92,20 @@ window.Quiz = function(elem) {
       return quizQuestions.join('');
     },
     validation: function() {
-
-      var selGroups = document.querySelectorAll('.quiz-wrapper div[class^="group-"]');
-
-      var selGroupsVals = [];
+      let selGroups = document.querySelectorAll('.quiz-wrapper div[class^="group-"]');
+      let selGroupsVals = [];
 
       [].forEach.call(selGroups, function(e, i) {
-
-        if (e.querySelector('input:checked')) {
-          selGroupsVals.push(e.querySelector('input:checked').value);
+        if (e.querySelector('input:checked') !== null &&
+            e.querySelector('input:checked').value === QuizBuilder.data[i].correctAnswer) {
+          e.classList.remove('error');
+          e.classList.add('valid');
           return;
         }
 
-        selGroupsVals.push(undefined);
+        e.classList.remove('valid');
+        e.classList.add('error');
       });
-
-      console.log(selGroupsVals);
-
-      var validAnswers = [];
-      QuizBuilder.data.map(function(e) {
-
-        validAnswers.push(e.correctAnswer);
-      });
-
-      console.log(validAnswers);
     }
   };
 

@@ -11,8 +11,17 @@ h5 {
 
 label {
   display: block;
+  color: inherit;
 }
 
 .submit {
   margin-top: 12px;
+}
+
+.valid {
+  color: green;
+}
+
+.error {
+  color: red;
 }
