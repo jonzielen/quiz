@@ -58,12 +58,16 @@ window.Quiz = function(elem) {
         <h4>Quiz:</h4>
         <form action="/" class="quiz-wrapper">
           ${questions}
-        </form>
-        <button type="submit" class="quiz-submit">Submit</button>`;
+          <button type="submit" class="quiz-submit">Submit</button>
+          <button type="reset">Reset</button>
+        </form>`;
 
       this.quizElem.insertAdjacentHTML('afterbegin', temp);
 
-      document.querySelector('.quiz-submit').addEventListener('click', this.validation);
+      document.querySelector('form.quiz-wrapper').addEventListener('submit', function(e) {
+        e.preventDefault();
+        QuizBuilder.validation();
+      });
     },
     buildQuizQuestion: function() {
       const quizQuestions = this.data.map(function(e, i, a) {
