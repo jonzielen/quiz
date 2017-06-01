@@ -18,10 +18,37 @@ label {
   margin-top: 12px;
 }
 
-.valid {
-  color: green;
+.group-error {
+  color: red;
+  background-color: rgba(200, 54, 54, 0.2);
+
+  .input-valid {
+    span {
+      color: green;
+      text-decoration: none;
+    }
+  }
 }
 
-.error {
-  color: red;
+.input-error {
+  span {
+    text-decoration: line-through;
+  }
+}
+
+.group-valid {
+  color: green;
+
+  .input-error {
+    span {
+      color: red;
+      text-decoration: line-through;
+    }
+  }
+}
+
+.input-valid {
+  span {
+    text-decoration: none;
+  }
 }

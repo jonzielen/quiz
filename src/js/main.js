@@ -59,10 +59,16 @@ window.Quiz = function(elem) {
         <form action="/" class="quiz-wrapper">
           ${questions}
           <button type="submit" class="quiz-submit">Submit</button>
-          <button type="reset">Reset</button>
-        </form>`;
+          <button type="reset" class="reset">Reset</button>
+        </form>
+        <div id="numberCorrect"></div>`;
 
       this.quizElem.insertAdjacentHTML('afterbegin', temp);
+
+      document.querySelector('.reset').addEventListener('click', function() {
+        QuizBuilder.quizElem.innerHTML = '';
+        QuizBuilder.buildQuizTemplate();
+      });
 
       document.querySelector('form.quiz-wrapper').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -71,16 +77,16 @@ window.Quiz = function(elem) {
     },
     buildQuizQuestion: function() {
       const quizQuestions = this.data.map((e, i, a) => {
-        let quizList = `<h5>Q: ${e.question}</h5>`;
+        let quizList = `<div class="group-${i+1}">`;
 
-        quizList = quizList + `<div class="group-${i+1}">`;
+        quizList = quizList + `<h5>Q: ${e.question}</h5>`;
 
         for(let key in e.answers) {
           let value = e.answers[key];
 
           quizList = quizList + `<label for="quesion-${i+1}-${key}">
             <input type="radio" id="quesion-${i+1}-${key}" name="quesion-${i+1}" value="${key}">
-            ${value}
+            <span>${value}</span>
           </label>`;
         }
 
@@ -94,21 +100,40 @@ window.Quiz = function(elem) {
     validation: function() {
       let selGroups = document.querySelectorAll('.quiz-wrapper div[class^="group-"]');
       let selGroupsVals = [];
+      let count = 0;
 
-      [].forEach.call(selGroups, function(e, i) {
-        if (e.querySelector('input:checked') !== null &&
-            e.querySelector('input:checked').value === QuizBuilder.data[i].correctAnswer) {
-          e.classList.remove('error');
-          e.classList.add('valid');
-          return;
+      [].forEach.call(selGroups, function(group, i) {
+        let selections = group.querySelectorAll('input');
+
+        // adds error message to inputs
+        [].forEach.call(selections, function(input) {
+          if (input.value === QuizBuilder.data[i].correctAnswer) {
+
+            input.parentElement.classList.remove('input-error');
+            input.parentElement.classList.add('input-valid');
+          } else {
+
+            input.parentElement.classList.remove('input-valid');
+            input.parentElement.classList.add('input-error');
+          }
+        });
+
+        // adds errors to groups
+        if (group.querySelector('input:checked') !== null &&
+            group.querySelector('input:checked').value === QuizBuilder.data[i].correctAnswer) {
+            group.classList.remove('group-error');
+            group.classList.add('group-valid');
+            count = count + 1;
+            return;
+        } else {
+          group.classList.remove('group-valid');
+          group.classList.add('group-error');
         }
-
-        e.classList.remove('valid');
-        e.classList.add('error');
       });
+
+      document.getElementById('numberCorrect').innerHTML = count;
     }
   };
 
   QuizBuilder.buildQuizTemplate();
-
 };

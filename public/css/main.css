@@ -1,2 +1,2 @@
-body{background-color:#eee}h5{padding-top:0;margin-top:6px;padding-bottom:0;margin-bottom:6px}label{display:block;color:inherit}.submit{margin-top:12px}.valid{color:green}.error{color:red}
+body{background-color:#eee}h5{padding-top:0;margin-top:6px;padding-bottom:0;margin-bottom:6px}label{display:block;color:inherit}.submit{margin-top:12px}.group-error{color:red;background-color:rgba(200,54,54,.2)}.group-error .input-valid span{color:green;text-decoration:none}.input-error span{text-decoration:line-through}.group-valid{color:green}.group-valid .input-error span{color:red;text-decoration:line-through}.input-valid span{text-decoration:none}
 /*# sourceMappingURL=main.css.map*/
