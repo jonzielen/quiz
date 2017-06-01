@@ -2,17 +2,6 @@ window.Quiz = function(elem) {
 
   const QuizBuilder = {
     quizElem: document.querySelector(elem),
-    newElem: function(elemType, className, text) {
-      let elem = document.createElement(elemType);
-
-      // adds class name if set
-      if (className !== undefined) elem.className = className;
-
-      // adds text if set
-      if (text !== undefined) elem.innerHTML = text;
-
-      return elem;
-    },
     data: [
       {
         question: 'pick b',
@@ -131,7 +120,7 @@ window.Quiz = function(elem) {
         }
       });
 
-      document.getElementById('numberCorrect').innerHTML = count;
+      document.getElementById('numberCorrect').innerHTML = `You got ${count} correct!`;
     }
   };
 
